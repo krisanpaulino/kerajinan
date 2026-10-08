@@ -28,7 +28,7 @@
                         <span class="badge {{ $promosi->status === 'aktif' ? 'bg-success' : 'bg-secondary' }}">
                             {{ $promosi->status === 'aktif' ? 'Active' : 'Inactive' }}
                         </span>
-                        @if ($promosi->tanggal_berakhir < now())
+                        @if ($promosi->tanggal_akhir < now())
                             <span class="badge bg-danger ms-1">Expired</span>
                         @elseif($promosi->tanggal_mulai > now())
                             <span class="badge bg-primary ms-1">Scheduled</span>
@@ -110,14 +110,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="tanggal_berakhir" class="form-label">
+                                    <label for="tanggal_akhir" class="form-label">
                                         <i class="fas fa-calendar-check me-1"></i>End Date & Time *
                                     </label>
-                                    <input type="datetime-local" name="tanggal_berakhir" id="tanggal_berakhir"
-                                        class="form-control @error('tanggal_berakhir') is-invalid @enderror"
-                                        value="{{ old('tanggal_berakhir', \Carbon\Carbon::parse($promosi->tanggal_berakhir)->format('Y-m-d\TH:i')) }}"
+                                    <input type="datetime-local" name="tanggal_akhir" id="tanggal_akhir"
+                                        class="form-control @error('tanggal_akhir') is-invalid @enderror"
+                                        value="{{ old('tanggal_akhir', \Carbon\Carbon::parse($promosi->tanggal_akhir)->format('Y-m-d\TH:i')) }}"
                                         required>
-                                    @error('tanggal_berakhir')
+                                    @error('tanggal_akhir')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -210,14 +210,14 @@
                             <div class="p-3 bg-light rounded">
                                 <i class="fas fa-calendar-check text-warning fa-2x mb-2"></i>
                                 <h6 class="mb-1">Ends</h6>
-                                <small>{{ \Carbon\Carbon::parse($promosi->tanggal_berakhir)->format('M d, Y H:i') }}</small>
+                                <small>{{ \Carbon\Carbon::parse($promosi->tanggal_akhir)->format('M d, Y H:i') }}</small>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center">
                         <div class="mb-2">
-                            @if ($promosi->tanggal_berakhir < now())
+                            @if ($promosi->tanggal_akhir < now())
                                 <span class="badge bg-danger fs-6">
                                     <i class="fas fa-clock me-1"></i>Expired
                                 </span>
@@ -232,7 +232,7 @@
                             @endif
                         </div>
                         <p class="mb-0 text-muted">
-                            {{ \Carbon\Carbon::parse($promosi->tanggal_berakhir)->diffForHumans() }}
+                            {{ \Carbon\Carbon::parse($promosi->tanggal_akhir)->diffForHumans() }}
                         </p>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
     <script>
         $(document).ready(function() {
             // Form validation and preview updates
-            $('#idProduk, #diskon, #tanggal_mulai, #tanggal_berakhir, #status').change(function() {
+            $('#idProduk, #diskon, #tanggal_mulai, #tanggal_akhir, #status').change(function() {
                 updatePreview();
             });
 
@@ -306,7 +306,7 @@
             const productSelect = document.getElementById('idProduk');
             const discountInput = document.getElementById('diskon');
             const startDateInput = document.getElementById('tanggal_mulai');
-            const endDateInput = document.getElementById('tanggal_berakhir');
+            const endDateInput = document.getElementById('tanggal_akhir');
             const statusSelect = document.getElementById('status');
 
             if (!productSelect.value || !discountInput.value) {

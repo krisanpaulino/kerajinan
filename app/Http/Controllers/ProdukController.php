@@ -320,14 +320,15 @@ class ProdukController extends Controller
      */
     public function storePromosi(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             // 'nama_promosi' => 'required|string|max:255',
             'idProduk' => 'required|exists:produk,idProduk',
             'tanggal_mulai' => 'required|date|after_or_equal:today',
             'tanggal_akhir' => 'required|date|after:tanggal_mulai',
             'tanggal_selesai' => 'sometimes|date|after:tanggal_mulai', // alias for tanggal_akhir
-            'persentase_diskon' => 'required|numeric|min:0|max:100',
-            'diskon' => 'sometimes|numeric|min:0|max:100', // alias for persentase_diskon
+            // 'persentase_diskon' => 'required|numeric|min:0|max:100',
+            'diskon' => 'required|numeric|min:0|max:100', // alias for persentase_diskon
             'status' => 'required|in:aktif,tidak_aktif'
         ]);
 
@@ -337,9 +338,9 @@ class ProdukController extends Controller
         }
 
         // Ensure we have discount percentage (handle both column names)
-        if (!isset($validated['persentase_diskon']) && isset($validated['diskon'])) {
-            $validated['persentase_diskon'] = $validated['diskon'];
-        }
+        // if (!isset($validated['persentase_diskon']) && isset($validated['diskon'])) {
+        //     $validated['persentase_diskon'] = $validated['diskon'];
+        // }
 
         // Check for conflicting promotions
         $existingPromotion = Promosi::where('idProduk', $validated['idProduk'])

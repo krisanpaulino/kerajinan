@@ -107,16 +107,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="presentase_diskon" class="form-label">
+                                    <label for="diskon" class="form-label">
                                         <i class="fas fa-percent me-1"></i>Discount Percentage *
                                     </label>
                                     <div class="input-group">
-                                        <input type="number" name="presentase_diskon" id="presentase_diskon"
-                                            class="form-control @error('presentase_diskon') is-invalid @enderror"
-                                            min="0" max="100" step="0.01"
-                                            value="{{ old('presentase_diskon') }}" required>
+                                        <input type="number" name="diskon" id="diskon"
+                                            class="form-control @error('diskon') is-invalid @enderror" min="0"
+                                            max="100" step="0.01" value="{{ old('diskon') }}" required>
                                         <span class="input-group-text">%</span>
-                                        @error('presentase_diskon')
+                                        @error('diskon')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -240,7 +239,7 @@
             document.getElementById('tanggal_akhir').value = nextWeek.toISOString().slice(0, 16);
 
             // Form validation and preview updates
-            $('#idProduk, #presentase_diskon, #tanggal_mulai, #tanggal_akhir, #status').change(function() {
+            $('#idProduk, #diskon, #tanggal_mulai, #tanggal_akhir, #status').change(function() {
                 updatePreview();
                 checkConflicts();
             });
@@ -255,7 +254,7 @@
 
         function updatePreview() {
             const productId = document.getElementById('idProduk').value;
-            const discountInput = document.getElementById('presentase_diskon');
+            const discountInput = document.getElementById('diskon');
             const startDateInput = document.getElementById('tanggal_mulai');
             const endDateInput = document.getElementById('tanggal_akhir');
             const statusSelect = document.getElementById('status');
