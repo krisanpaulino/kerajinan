@@ -90,13 +90,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="tanggal_berakhir" class="form-label">
+                                    <label for="tanggal_akhir" class="form-label">
                                         <i class="fas fa-calendar-check me-1"></i>End Date & Time *
                                     </label>
-                                    <input type="datetime-local" name="tanggal_berakhir" id="tanggal_berakhir"
-                                        class="form-control @error('tanggal_berakhir') is-invalid @enderror"
-                                        value="{{ old('tanggal_berakhir') }}" required>
-                                    @error('tanggal_berakhir')
+                                    <input type="datetime-local" name="tanggal_akhir" id="tanggal_akhir"
+                                        class="form-control @error('tanggal_akhir') is-invalid @enderror"
+                                        value="{{ old('tanggal_akhir') }}" required>
+                                    @error('tanggal_akhir')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -107,15 +107,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="diskon" class="form-label">
+                                    <label for="presentase_diskon" class="form-label">
                                         <i class="fas fa-percent me-1"></i>Discount Percentage *
                                     </label>
                                     <div class="input-group">
-                                        <input type="number" name="diskon" id="diskon"
-                                            class="form-control @error('diskon') is-invalid @enderror" min="0"
-                                            max="100" step="0.01" value="{{ old('diskon') }}" required>
+                                        <input type="number" name="presentase_diskon" id="presentase_diskon"
+                                            class="form-control @error('presentase_diskon') is-invalid @enderror"
+                                            min="0" max="100" step="0.01"
+                                            value="{{ old('presentase_diskon') }}" required>
                                         <span class="input-group-text">%</span>
-                                        @error('diskon')
+                                        @error('presentase_diskon')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -236,10 +237,10 @@
 
             const nextWeek = new Date(now);
             nextWeek.setDate(nextWeek.getDate() + 7);
-            document.getElementById('tanggal_berakhir').value = nextWeek.toISOString().slice(0, 16);
+            document.getElementById('tanggal_akhir').value = nextWeek.toISOString().slice(0, 16);
 
             // Form validation and preview updates
-            $('#idProduk, #diskon, #tanggal_mulai, #tanggal_berakhir, #status').change(function() {
+            $('#idProduk, #presentase_diskon, #tanggal_mulai, #tanggal_akhir, #status').change(function() {
                 updatePreview();
                 checkConflicts();
             });
@@ -254,9 +255,9 @@
 
         function updatePreview() {
             const productId = document.getElementById('idProduk').value;
-            const discountInput = document.getElementById('diskon');
+            const discountInput = document.getElementById('presentase_diskon');
             const startDateInput = document.getElementById('tanggal_mulai');
-            const endDateInput = document.getElementById('tanggal_berakhir');
+            const endDateInput = document.getElementById('tanggal_akhir');
             const statusSelect = document.getElementById('status');
 
             if (!productId || !discountInput.value) {
@@ -316,7 +317,7 @@
         function checkConflicts() {
             const productId = document.getElementById('idProduk').value;
             const startDate = document.getElementById('tanggal_mulai').value;
-            const endDate = document.getElementById('tanggal_berakhir').value;
+            const endDate = document.getElementById('tanggal_akhir').value;
 
             if (!productId || !startDate || !endDate) {
                 $('#conflictCard').hide();
@@ -335,7 +336,7 @@
                 data: {
                     idProduk: productId,
                     tanggal_mulai: startDate,
-                    tanggal_berakhir: endDate,
+                    tanggal_akhir: endDate,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {

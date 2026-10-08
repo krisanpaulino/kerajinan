@@ -321,7 +321,7 @@ class ProdukController extends Controller
     public function storePromosi(Request $request)
     {
         $validated = $request->validate([
-            'nama_promosi' => 'required|string|max:255',
+            // 'nama_promosi' => 'required|string|max:255',
             'idProduk' => 'required|exists:produk,idProduk',
             'tanggal_mulai' => 'required|date|after_or_equal:today',
             'tanggal_akhir' => 'required|date|after:tanggal_mulai',

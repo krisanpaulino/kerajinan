@@ -592,7 +592,8 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <h5>Hubungi Kami</h5>
                     <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt me-2"></i>Kabupaten Malaka, Nusa Tenggara Timur, Indonesia</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i>Kabupaten Malaka, Nusa Tenggara Timur, Indonesia
+                        </p>
                         <p><i class="fas fa-phone me-2"></i>+62 21 1234 5678</p>
                         <p><i class="fas fa-envelope me-2"></i>info@kerajinanidonesia.com</p>
                     </div>
