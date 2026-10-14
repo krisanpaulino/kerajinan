@@ -200,6 +200,10 @@
             font-weight: 600;
         }
 
+        .card-header :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+            color: white !important;
+        }
+
         .table {
             border-radius: 8px;
             overflow: hidden;

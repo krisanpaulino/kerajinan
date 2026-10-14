@@ -7,6 +7,7 @@ use App\Models\Pesanan;
 use App\Models\User;
 use App\Models\Produk;
 use App\Models\Promosi;
+use App\Models\Testimoni;
 use App\Models\Kategori;
 use App\Models\Pembayaran;
 use App\Notifications\OrderStatusChanged;
@@ -87,6 +88,12 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
+        // Latest testimonials
+        $testimoniTerbaru = Testimoni::with(['user', 'produk'])
+            ->orderByDesc('tanggal')
+            ->take(10)
+            ->get();
+
         // Chart Data for Sales Overview (last 30 days)
         $chartLabels = [];
         $chartData = [];
@@ -111,6 +118,7 @@ class AdminController extends Controller
             'lowStockProducts',
             'activePromotions',
             'topProducts',
+            'testimoniTerbaru',
             'chartLabels',
             'chartData'
         ));

@@ -331,6 +331,66 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold">10 Testimoni Terbaru</h6>
+                    </div>
+                    @if ($testimoniTerbaru->isNotEmpty())
+                        <div class="card-body">
+                            <div id="testimoniCarousel" class="carousel slide" data-bs-ride="carousel"
+                                data-bs-interval="7000">
+                                <div class="carousel-inner">
+                                    @foreach ($testimoniTerbaru as $testimoni)
+                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                            <div class="px-4 px-md-5 py-3">
+                                                <div class="mb-2" aria-label="Rating {{ $testimoni->rating }} dari 5">
+                                                    @for ($star = 1; $star <= 5; $star++)
+                                                        <i class="fas fa-star {{ $star <= $testimoni->rating ? 'text-warning' : 'text-muted' }}"
+                                                            aria-hidden="true"></i>
+                                                    @endfor
+                                                </div>
+                                                <blockquote class="mb-3">
+                                                    <p class="mb-0">&ldquo;{{ Str::limit($testimoni->komentar, 220) }}&rdquo;</p>
+                                                </blockquote>
+                                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                                    <div>
+                                                        <strong>{{ $testimoni->user->username ?? 'Pelanggan' }}</strong>
+                                                        <span class="text-muted">&middot;
+                                                            {{ $testimoni->produk->nama_produk ?? 'Produk' }}</span>
+                                                    </div>
+                                                    <small class="text-muted">
+                                                        {{ $testimoni->tanggal?->format('d M Y, H:i') }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @if ($testimoniTerbaru->count() > 1)
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <button class="btn btn-outline-secondary btn-sm" type="button"
+                                            data-bs-target="#testimoniCarousel" data-bs-slide="prev"
+                                            aria-label="Testimoni sebelumnya" title="Testimoni sebelumnya">
+                                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                                        </button>
+                                        <span class="small text-muted">{{ $testimoniTerbaru->count() }} testimoni</span>
+                                        <button class="btn btn-outline-secondary btn-sm" type="button"
+                                            data-bs-target="#testimoniCarousel" data-bs-slide="next"
+                                            aria-label="Testimoni berikutnya" title="Testimoni berikutnya">
+                                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @else
+                        <div class="card-body text-muted">Belum ada testimoni.</div>
+                    @endif
+                </div>
+            </div>
+        </div>
     @endsection
 
     @push('styles')
@@ -406,14 +466,14 @@
                     datasets: [{
                         label: 'Penjualan Harian (Rp)',
                         data: chartData,
-                        backgroundColor: 'rgba(78, 115, 223, 0.1)',
-                        borderColor: 'rgba(78, 115, 223, 1)',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
                         pointRadius: 4,
-                        pointBackgroundColor: 'rgba(78, 115, 223, 1)',
-                        pointBorderColor: 'rgba(255, 255, 255, 2)',
+                        pointBackgroundColor: 'rgba(220, 53, 69, 1)',
+                        pointBorderColor: 'rgba(255, 255, 255, 1)',
                         pointHoverRadius: 6,
-                        pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
-                        pointHoverBorderColor: 'rgba(255, 255, 255, 2)',
+                        pointHoverBackgroundColor: 'rgba(220, 53, 69, 1)',
+                        pointHoverBorderColor: 'rgba(255, 255, 255, 1)',
                         pointHitRadius: 10,
                         pointBorderWidth: 2,
                         fill: true,
